@@ -1,28 +1,26 @@
 <template>
-  <div>
-    <div class="flex justify-center space-x-2">
-      <input
-        v-for="(box, index) in numBoxes"
-        :key="index"
-        ref="inputBoxes"
-        v-model="pin[index]"
-        v-mask="regex"
-        @input="handleInput(index)"
-        @paste="handlePaste($event, index)"
-        @keydown="handleKeyDown($event, index)"
-        @focus="handleFocus(index)"
-        @blur="handleBlur(index)"
-        :class="{
-          'bg-white': pin[index],
-          'bg-green-500': isFilled(),
-          'bg-gray-200': !pin[index],
-        }"
-        class="text-2xl w-12 h-12 text-center rounded focus:outline-none focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
-        :type="secretMode ? 'password' : 'text'"
-        :maxlength="1"
-        :autofocus="index === 0"
-      />
-    </div>
+  <div class="flex justify-center space-x-2">
+    <input
+      v-for="(_, index) in numBoxes"
+      :key="index"
+      ref="inputBoxes"
+      v-model="pin[index]"
+      v-mask="regex"
+      @input="handleInput(index)"
+      @paste="handlePaste($event, index)"
+      @keydown="handleKeyDown($event, index)"
+      @focus="handleFocus(index)"
+      @blur="handleBlur(index)"
+      :class="{
+        'bg-white': pin[index],
+        'bg-green-500': isFilled(),
+        'bg-gray-200': !pin[index],
+      }"
+      class="text-2xl w-12 h-12 text-center rounded focus:outline-none focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+      :type="secretMode ? 'password' : 'text'"
+      :maxlength="1"
+      :autofocus="index === 0"
+    />
   </div>
 </template>
 
@@ -47,6 +45,8 @@ export default {
     },
   },
   setup(props: any) {
+    const inputBoxes = ref<HTMLInputElement[]>([]);
+
     const pin = ref(
       props.defaultValue
         .split("")
@@ -96,19 +96,12 @@ export default {
       }
     };
 
-    const inputBoxes = ref([]);
-
     onMounted(() => {
       if (pin.value.length > 0) {
         inputBoxes.value[pin.value.length]?.focus();
       }
     });
 
-    // const notify = (message: string) => {
-    //   toast(message, {
-    //     autoClose: 1000,
-    //   });
-    // };
     const isFilled = () => {
       return (
         pin.value.length === props.numBoxes &&

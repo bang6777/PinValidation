@@ -11,12 +11,7 @@
       @keydown="handleKeyDown($event, index)"
       @focus="handleFocus(index)"
       @blur="handleBlur(index)"
-      :class="{
-        'bg-white': pin[index],
-        'bg-green-500': isFilled(),
-        'bg-gray-200': !pin[index],
-      }"
-      class="text-2xl w-12 h-12 text-center rounded focus:outline-none focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+      class="text-4xl w-12 h-12 text-center rounded focus:outline-none focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
       :type="secretMode ? 'password' : 'text'"
       :maxlength="1"
       :autofocus="index === 0"
@@ -126,6 +121,5 @@ export default {
 <style scoped>
 input[type="password"] {
   font-family: "circle";
-  letter-spacing: 0.5rem;
 }
 </style>

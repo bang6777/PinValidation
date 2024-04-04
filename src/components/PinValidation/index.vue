@@ -53,7 +53,7 @@ export default {
 
     const handleInput = (index: number) => {
       if (pin.value[index]?.match(props.regex)) {
-        inputBoxes.value[index + 1].focus();
+        inputBoxes.value[index + 1]?.focus();
       } else {
         pin.value[index] = "";
       }
@@ -61,7 +61,7 @@ export default {
 
     const handleKeyDown = (event: KeyboardEvent, index: number) => {
       if (event.key === "Backspace" && !pin.value[index]) {
-        inputBoxes.value[index - 1].focus();
+        inputBoxes.value[index - 1]?.focus();
       }
     };
 

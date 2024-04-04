@@ -11,6 +11,9 @@
       @keydown="handleKeyDown($event, index)"
       @focus="handleFocus(index)"
       @blur="handleBlur(index)"
+      :class="{
+        'bg-green-500': isFilled(),
+      }"
       class="text-4xl w-12 h-12 text-center rounded focus:outline-none focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
       :type="secretMode ? 'password' : 'text'"
       :maxlength="1"
